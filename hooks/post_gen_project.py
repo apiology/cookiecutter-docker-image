@@ -43,3 +43,8 @@ if __name__ == '__main__':
                                    '{{ cookiecutter.github_username }}/'
                                    '{{ cookiecutter.project_slug }}'])
             subprocess.check_call(['circleci', 'follow'])
+            print("1. git push")
+            print("2. https://hub.docker.com/repository/create")
+            print("3. Fill out and set up autobuild")
+            print("4. + button - create build rule for main branch")
+            print("5. Create & Build")
