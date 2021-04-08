@@ -16,13 +16,13 @@ help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 build: ## build docker image
-	docker build .
+	docker build --progress plain -t {{ cookiecutter.full_docker_image_name }} .
 
 default: build test ## run default typechecking and tests
 
 clean: ## remove all built artifacts
 
-test: ## run tests quickly
+test: build ## run tests quickly
 
 quality:  ## run precommit quality checks
 	bundle exec overcommit --run
