@@ -79,6 +79,7 @@ commands:
         default: ''
         description: "Which tox arguments to pass"
     steps:
+      - setup_remote_docker
       - set_up_environment
       - run_with_languages:
           label: Test
