@@ -53,6 +53,5 @@ if __name__ == '__main__':
             subprocess.check_call(['git', 'push'])
             subprocess.check_call(['git', 'branch', '--set-upstream-to=origin/main', 'main'])
             print("1. https://hub.docker.com/repository/create")
-            print("2. Fill out and set up autobuild")
-            print("3. + button - create build rule for main branch")
-            print("4. Create & Build")
+            print("2. Fill out")
+            print("3. Create")
