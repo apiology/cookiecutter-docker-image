@@ -16,7 +16,11 @@ help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 build: ## build docker image
-	docker build --progress plain -t {{ cookiecutter.full_docker_image_name }} .
+	docker build --pull --progress plain -t {{ cookiecutter.full_docker_image_name }}:latest .
+
+publish: build ## publish docker image
+	docker push {{ cookiecutter.full_docker_image_name }}:latest
+
 
 default: build test ## run default typechecking and tests
 
