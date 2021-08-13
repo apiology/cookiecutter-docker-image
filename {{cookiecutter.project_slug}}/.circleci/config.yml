@@ -34,7 +34,9 @@ commands:
     steps:
       - checkout
       - restore_cache:
-          key: gems-v4-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          key: gems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+      - restore_cache:
+          key: wheels-v1-{% raw %}{{ checksum "requirements_dev.txt" }}{% endraw %}
       - run:
           name: Initialize packages
           command: |
@@ -49,9 +51,13 @@ commands:
               exit 1
             fi
       - save_cache:
-          key: gems-v4-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          key: gems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - "vendor/bundle"
+      - save_cache:
+          key: wheels-v1-{% raw %}{{ checksum "requirements_dev.txt" }}{% endraw %}
+          paths:
+            - "/home/circleci/.cache/pip/wheels"
       - run:
           name: Download new circleci tool
           command: |
@@ -109,6 +115,7 @@ workflows:
                 - main
     jobs:
       - build
+      - overcommit
   overcommit:
     jobs:
       - overcommit
