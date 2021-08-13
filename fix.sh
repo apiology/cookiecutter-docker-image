@@ -330,7 +330,6 @@ ensure_overcommit() {
   # test, or otherwise don't have a Git repo to install hooks into...
   if [ -d .git ]
   then
-    set_rbenv_env_variables
     bundle exec overcommit --install
   else
     >&2 echo 'Not in a git repo; not installing git hooks'
