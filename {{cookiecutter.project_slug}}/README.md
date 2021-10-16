@@ -6,5 +6,8 @@ WARNING: This is not ready for use yet!
 
 {{ cookiecutter.project_short_description }}
 
+```sh
+docker pull {{ cookiecutter.full_docker_image_name }}:latest
+```
 To build locally, run `make`.  You can see automatic builds at
 [Docker Hub](https://hub.docker.com/repository/docker/{{ cookiecutter.full_docker_image_name }})
