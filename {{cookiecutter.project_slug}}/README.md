@@ -9,5 +9,6 @@ WARNING: This is not ready for use yet!
 ```sh
 docker pull {{ cookiecutter.full_docker_image_name }}:latest
 ```
-To build locally, run `make`.  You can see automatic builds at
+
+To build locally, run `make`.  You can see images at
 [Docker Hub](https://hub.docker.com/repository/docker/{{ cookiecutter.full_docker_image_name }})
