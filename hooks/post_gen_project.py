@@ -50,8 +50,8 @@ if __name__ == '__main__':
                                    '.',
                                    '{{ cookiecutter.github_username }}/'
                                    '{{ cookiecutter.project_slug }}'])
-            subprocess.check_call(['circleci', 'follow'])
             subprocess.check_call(['git', 'push'])
+            subprocess.check_call(['circleci', 'follow'])
             subprocess.check_call(['git', 'branch', '--set-upstream-to=origin/main', 'main'])
             print("1. https://hub.docker.com/repository/create")
             print("2. Fill out")
