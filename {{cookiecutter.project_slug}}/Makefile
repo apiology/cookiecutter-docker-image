@@ -23,7 +23,7 @@ publish: build ## publish docker image
 
 typecheck: ## validate types in code and configuration
 
-default: build test quality ## run default typechecking, tests and quality
+default: build test quality ## build docker image, run tests and quality
 
 requirements_dev.txt.installed: requirements_dev.txt
 	pip install -q --disable-pip-version-check -r requirements_dev.txt
