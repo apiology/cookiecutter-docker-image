@@ -60,9 +60,11 @@ coverage: test report-coverage ## check code coverage
 report-coverage: test ## Report summary of coverage to stdout, and generate HTML, XML coverage report
 
 report-coverage-to-codecov: report-coverage ## use codecov.io for PR-scoped code coverage reports
-	@curl -Os https://uploader.codecov.io/latest/linux/codecov
-	@chmod +x codecov
-	@./codecov --file coverage.xml --nonZero
+#	No testing is done, no coverage measurement is taken..
+#
+#	@curl -Os https://uploader.codecov.io/latest/linux/codecov
+#	@chmod +x codecov
+#	@./codecov --file coverage.xml --nonZero
 
 cicoverage: report-coverage-to-codecov ## check code coverage, then report to codecov
 
