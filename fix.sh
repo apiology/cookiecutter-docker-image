@@ -116,7 +116,7 @@ ensure_ruby_versions() {
 
   # You can find out which feature versions are still supported / have
   # been release here: https://www.ruby-lang.org/en/downloads/
-  ruby_versions="$(latest_ruby_version 3.2)"
+  ruby_versions="$(latest_ruby_version 3.3)"
 
   echo "Latest Ruby versions: ${ruby_versions}"
 
@@ -253,7 +253,26 @@ install_package() {
   apt_package=${2:-${homebrew_package}}
   if [ "$(uname)" == "Darwin" ]
   then
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install "${homebrew_package}"
+    HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_INSTALL_UPGRADE=1 brew install "${homebrew_package}"
+  elif type apt-get >/dev/null 2>&1
+  then
+    if ! dpkg -s "${apt_package}" >/dev/null
+    then
+      update_apt
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "${apt_package}"
+    fi
+  else
+    >&2 echo "Teach me how to install packages on this plaform"
+    exit 1
+  fi
+}
+
+update_package() {
+  homebrew_package=${1:?homebrew package}
+  apt_package=${2:-${homebrew_package}}
+  if [ "$(uname)" == "Darwin" ]
+  then
+    brew install "${homebrew_package}"
   elif type apt-get >/dev/null 2>&1
   then
     update_apt
@@ -279,7 +298,7 @@ ensure_python_build_requirements() {
 ensure_python_versions() {
   # You can find out which feature versions are still supported / have
   # been release here: https://www.python.org/downloads/
-  python_versions="$(latest_python_version 3.12)  $(latest_python_version 3.11) $(latest_python_version 3.10) $(latest_python_version 3.9) $(latest_python_version 3.8)"
+  python_versions="$(latest_python_version 3.12) $(latest_python_version 3.11) $(latest_python_version 3.10) $(latest_python_version 3.9) $(latest_python_version 3.8)"
 
   echo "Latest Python versions: ${python_versions}"
 
