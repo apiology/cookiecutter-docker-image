@@ -213,10 +213,15 @@ ensure_bundle() {
   then
     >&2 echo "Original bundler version: ${bundler_version}"
     gem install bundler:2.6.9
-    # need to do this first before 'bundle update --bundler' will work
-    make bundle_install
-    bundle update --bundler
-    >&2 echo "Updated bundler version: $(bundle --version)"
+    rbenv rehash 2>/dev/null || true
+    if [ -f Gemfile.lock ]
+    then
+      bundle _2.6.9_ install
+      bundle _2.6.9_ update --bundler
+    else
+      bundle _2.6.9_ lock
+    fi
+    >&2 echo "Updated bundler version: $(bundle _2.6.9_ --version)"
     # ensure next step installs fresh bundle
     rm -f Gemfile.lock.installed
   fi
@@ -231,7 +236,8 @@ ensure_bundle() {
   #
   # This affects nokogiri, which will try to reinstall itself in
   # Docker builds where it's already installed if this is not run.
-  make Gemfile.lock
+  # Docker builds and CircleCI run on x86_64-linux; keep these in the lockfile.
+  bundle lock --add-platform x86_64-linux x86_64-linux-musl
   make bundle_install
 }
 
