@@ -87,7 +87,7 @@ gem_dependencies: .bundle/config
 Gemfile.lock.installed: Gemfile vendor/.keep
 	touch Gemfile.lock.installed
 
-vendor/.keep: Gemfile.lock
+vendor/.keep: Gemfile.lock .ruby-version
 	make gem_dependencies
 	bundle install
 	touch vendor/.keep
@@ -139,4 +139,3 @@ update_from_cookiecutter: ## Bring in changes from template project used to crea
 
 post_cookiecutter_sync: ## Ecosystem-specific steps after template sync (empty by default)
 	@:
-
