@@ -170,6 +170,3 @@ update_from_cookiecutter: ## Bring in changes from template project used to crea
 post_cookiecutter_sync: ## Ecosystem-specific steps after template sync (empty by default)
 	@:
 
-post_cookiecutter_sync: ## Ecosystem-specific steps after template sync (empty by default)
-	@:
-
